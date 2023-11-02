@@ -14,12 +14,32 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
   private ArrayList<PessoaEleitora> pessoasEleitoras = new ArrayList<>();
   private ArrayList<String> cpfsComputados = new ArrayList<>();
 
+  /**
+   * Método para cadastrar uma pessoa candidata.
+   */
   public void cadastrarPessoaCandidata(String nome, int numero) {
+    for (PessoaCandidata pessoaCandidata : pessoasCandidatas) {
+      if (pessoaCandidata.getNumero() == numero) {
+        System.out.println("Número da pessoa candidata já utilizado!");
+        return;
+      }
+    }
 
+    pessoasCandidatas.add(new PessoaCandidata(nome, numero));
   }
 
+  /**
+   * Método para cadastrar uma pessoa eleitora.
+   */
   public void cadastrarPessoaEleitora(String nome, String cpf) {
+    for (PessoaEleitora pessoaEleitora : pessoasEleitoras) {
+      if (pessoaEleitora.getCpf().equals(cpf)) {
+        System.out.println("Pessoa eleitora já cadastrada!");
+        return;
+      }
+    }
 
+    pessoasEleitoras.add(new PessoaEleitora(nome, cpf));
   }
 
   public void votar(String cpfPessoaEleitora, int numeroPessoaCandidata) {
